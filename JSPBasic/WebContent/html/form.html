@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!--
+form태그
+: 클라이언트에서 사용자가 작성한 정보를 서버로 전송하기 위해 사용하는 기초태그  
+
+속성
+name : 나중에 변수명이 됨. 동일한 태그를 같은 이름으로 묶는 그룹핑의 역할도 함.
+reqired: 태크의 필수 값을 지정하는 옵션 필수 옵션 체크
+
+textarea : 장문의 글을 담을 수 있는 박스 
+-->
+	<form>
+		<h3>회원가입 양식</h3>
+		<hr>
+		아이디 : <input type="text" name="변수명" placeholder="아이디를 입력하세요" reqired><br/>
+		비밀번호 : <input type="password" name="비밀번호"><br/>
+		이메일 : <input type="email" name="이메일"><br/>
+		전공 : 
+		<input type="radio" name="major"> 경영학	<!-- 같은 이름으로 묶인 radio는 이름으로 묶인 것 중에 한개만 선택되도록 됨. -->
+		<input type="radio" name="major"> 컴퓨터
+		<input type="radio" name="major"> 전기전자
+		<input type="radio" name="major"> 기계공학
+		<br/>
+		관심분야
+		<input type="checkbox" name="inter"> 자바
+		<input type="checkbox" name="inter"> DB
+		<input type="checkbox" name="inter"> JSP
+		<input type="checkbox" name="inter"> JavaScript
+		<br/>
+		통신사:
+		<select name="phone1">
+			<option> SKT </option>
+			<option> KT </option>
+			<option> LGU+ </option>
+		</select><br/>
+		자기소개 <br/>
+		<textarea rows="5" cols="30" name = "글"></textarea>
+		<br/>
+		<!-- submit은 폼안에 있는 데이터를 서버로 전송 -->
+		<input type="submit" value="가입하기">
+		<input type="button" value="그냥버튼">
+		
+	</form>
+</body>
+</html>
