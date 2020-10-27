@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<p>html주석</p>
-<!-- html 주석 -->
-<p>jsp주석</p>
-<%-- jsp 전용태그를 주석하는 용도 --%>
-
+	
+	<p>html주석</p>
+	<!-- html주석 -->
+	
+	<p>jsp주석</p>
+	<%-- jsp전용태그를 주석하는 용도 --%>
+	
+	
 </body>
 </html>

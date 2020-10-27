@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <footer>
 	<h2>
-		CopyRight@2020.10.27
+		CopyRight＠2020.10.27
 	</h2>
-</footer>
+</footer>    
+    

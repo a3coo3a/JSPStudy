@@ -5,42 +5,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!--
-테이블은 표를 작성 하는 태그
-tr: 행, td: 열
-th : 제목표현 (굵게, 가운데정렬)
-border : 윤곽
-
-style은 css 디자인을 넣는 속성
-
-rowspan : 행합치기
-colspan : 열합치기
-align : 정렬
--->
-	<table border="1" style="width : 300px">
+	<!-- table은 표를 작성하는 태그 -->
+	<!-- tr은 행, td열, th는 제목 -->
+	<!-- style속성은 css디자인을 넣는 속성입니다. -->
+	<table border="1" style="width: 300px" >
 		<tr>
 			<th>이름</th>
 			<th>성별</th>
 			<th>주소</th>
 			<th>나이</th>
-			<td rowspan="4">추가...</td>
+			<td rowspan="4">추가..</td>
 		</tr>
+		
 		<tr>
 			<td>홍길동</td>
 			<td>남자</td>
 			<td>서울</td>
 			<td>45세</td>
 		</tr>
+		
 		<tr>
 			<td>홍길자</td>
 			<td>여자</td>
 			<td>부산</td>
-			<td>48세</td>
-		</tr>
+			<td>40세</td>
+		</tr>		
 		<tr>
-			<td colspan="4" align="right">합계 : 2명</td>
+			<td colspan="4" align="right">합계:2명</td>
 		</tr>
+		
 	</table>
-
+	
 </body>
 </html>

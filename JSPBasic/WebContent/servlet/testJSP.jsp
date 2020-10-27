@@ -7,14 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<%@ include file="include_header.jsp" %>
-	
-	<section>
-		본문에 대한 영역..
-	</section>
-	
-	<%@ include file="include_footer.jsp" %>
-	
+	<h2>testJSP</h2>
 </body>
 </html>
