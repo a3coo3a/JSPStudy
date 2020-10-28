@@ -18,7 +18,6 @@ public class TestServlet extends HttpServlet {
 	// 생성자
     public TestServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
