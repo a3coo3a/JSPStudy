@@ -28,7 +28,7 @@ public class OutServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();		// 브라우저 화면에 출력할 printwriter객체를 얻는 방법
 		
-		out.println("안녕?");
+		out.println("<b>안녕?</b>");
 		
 	}
 
