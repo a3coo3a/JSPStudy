@@ -1,17 +1,22 @@
+<%@page import="com.myweb.user.model.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../include/header.jsp" %>
-
+<%@ include file="../include/header.jsp" %>
+<%
+	// 이 페이지에 진입했을 때, 비밀번호를 제외하고 회원정보를 input태그에 처리합니다.
+	UserVO vo = (UserVO)session.getAttribute("login");
+	//readonly는 input태그의 읽기만 가능하게 하는 속성
+%>
 <section>
 	<div align="center">
-		<h2>회원가입 연습</h2>
+		<h2>회원정보 수정연습</h2>
 		<hr>
-		<form name="regForm" action="join_ok.jsp" method="post">
+		<form name="regForm" action="update_ok.jsp" method="post">
 			<table>	
 				<tr>
 					<td>아이디 : </td>
 					<td>
-						<input type="text" name="id" placeholder="4글자 이상">
+						<input type="text" name="id" value="<%=vo.getId() %>" readonly>
 					</td>
 				</tr>
 				<tr>
@@ -29,29 +34,29 @@
 				<tr>
 					<td>이름 : </td>
 					<td>
-						<input type="text" name="name">
+						<input type="text" name="name" value="<%=vo.getName() %>">
 					</td>
 				</tr>
 				<tr>
 					<td>이메일 : </td>
 					<td>
-						<input type="email" name="email">
+						<input type="email" name="email" value="<%=vo.getEmail() %>">
 					</td>
 				</tr>
 				<tr>
 					<td>주소 : </td>
 					<td>
-						<input type="text" name="address">
+						<input type="text" name="address" value="<%=vo.getAddress() %>">
 					</td>
 				</tr>
 			</table>
 			<br/>
-			<input type="button" value="가입" class="btn btn-default" onclick="check()">
-			<input type="button" value="로그인" class="btn btn-primary" onclick="location.href='login.jsp'">
+			<input type="button" value="정보 수정" class="btn btn-default" onclick="check()">
+			<input type="button" value="취소" class="btn btn-primary" onclick="history.go(-1)">
 		</form>
 	</div>
 </section>
-
+<%@ include file="../include/footer.jsp" %>
 <script>
 <%-- java 의 함수와 동일한데 반환유형이 없음--%>
 	function check(){
@@ -78,8 +83,7 @@
 		}
 		
 		
+		
+		
 	}
 </script>
-
-
-<%@ include file="../include/footer.jsp"%>

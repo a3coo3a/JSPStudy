@@ -19,6 +19,10 @@
 		<hr>
 		아이디 : <%=id %><br/>
 		이름 : <%=name %><br/><br/>
+		
+		<a href="update.jsp">[정보 수정]</a>
+		<a href="delete.jsp">[회원 탈퇴]</a>
+		
 	</div>
 </section>
 <%@ include file="../include/footer.jsp" %>

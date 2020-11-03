@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,21 +69,24 @@
                     <li>
                         <a href="">BOARD</a>
                     </li>
-                   <% if(session.getAttribute("login") == null) { %>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/user/login.jsp">LOGIN</a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/user/join.jsp" style="color:red">JOIN</a>
-                    </li>
-                    <%} else { %>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/user/logout.jsp">LOGOUT</a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/user/mypage.jsp">MYPAGE</a>
-                    </li>
-                    <%} %>
+                    <c:choose>
+	                    <c:when test="${sessionScope.login == null}">
+		                    <li>
+		                        <a href="${pageContext.request.contextPath }/user/login.jsp">LOGIN</a>
+		                    </li>
+		                    <li>
+		                        <a href="<%=request.getContextPath() %>/user/join.jsp" style="color:red">JOIN</a>
+		                    </li>
+	                    </c:when>
+	                    <c:otherwise>
+		                    <li>
+		                        <a href="<%=request.getContextPath() %>/user/logout.jsp">LOGOUT</a>
+		                    </li>
+		                    <li>
+		                        <a href="<%=request.getContextPath() %>/user/mypage.jsp">MYPAGE</a>
+		                    </li>
+	                    </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
             

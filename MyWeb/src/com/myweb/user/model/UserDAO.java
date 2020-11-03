@@ -3,6 +3,9 @@ package com.myweb.user.model;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import com.myweb.util.JdbcUtil;
 
 public class UserDAO {
@@ -19,7 +22,10 @@ public class UserDAO {
 	private UserDAO() {
 		// 드라이버 로드
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//Class.forName("oracle.jdbc.driver.OracleDriver");
+			//커넥션 풀을 얻는 작업
+			InitialContext ctx = new InitialContext();  // 초기 설정 정보가 저장되는 객체
+			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
 		} catch (Exception e) {
 			System.out.println("드라이브 호출에러");
 		}
@@ -33,10 +39,12 @@ public class UserDAO {
 	//---------------------------------------------------//
 	// DB연결 변수들을 함수로 선언함.
 	
-	private String url = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
-	private String uid = "JSP";
-	private String upw = "JSP";
+//	private String url = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
+//	private String uid = "JSP";
+//	private String upw = "JSP";
 	
+	private DataSource ds;
+
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -48,7 +56,7 @@ public class UserDAO {
 		
 		try {
 			// 1. conn객체 생성
-			conn = DriverManager.getConnection(url, uid, upw);
+			conn = ds.getConnection();
 			// 2. pstmt 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
@@ -74,8 +82,7 @@ public class UserDAO {
 		String sql = "select * from users where id = ?";
 		
 		try {
-			conn = DriverManager.getConnection(url, uid, upw);
-			
+			conn = ds.getConnection();			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
@@ -103,7 +110,7 @@ public class UserDAO {
 		String sql = "select * from users where id = ? and pw=?";
 		
 		try {
-			conn = DriverManager.getConnection(url,uid,upw);
+			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
@@ -129,6 +136,52 @@ public class UserDAO {
 		}
 		
 		return vo;
+	}
+	
+	
+	//UPDATE메소드
+	public int update(UserVO vo) {
+		int result = 0;
+		String sql = "update users set pw=?,name=?,email=?,address=? where id=?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getPw());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getAddress());
+			pstmt.setString(5, vo.getId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn,pstmt,null);
+		}
+		
+		
+		return result;
+	}
+	
+	
+	public int delete(String id) {
+		int result = 0;
+		String sql = "delete from users where id=?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn, pstmt, null);
+		}
+		
+		
+		return result;
 	}
 	
 	
