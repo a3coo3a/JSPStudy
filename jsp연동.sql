@@ -9,3 +9,25 @@ CREATE TABLE users(
 alter table users add CONSTRAINT users_pk PRIMARY key (id);
 
 select * from users;
+
+
+
+---------------------------------------------board table ¸¸µé±â---------------------------------------------
+
+create table board(
+    bno NUMBER(10,0) not null,
+    writer VARCHAR2(50) not null,
+    title VARCHAR2(200) not null,
+    content VARCHAR2(2000),
+    regdate DATE DEFAULT sysdate,
+    hit NUMBER(10,0) default 0
+);
+alter table board add CONSTRAINT board_pk PRIMARY key (bno);
+
+create SEQUENCE board_seq START with 1 INCREMENT by 1 NOCACHE;
+
+select * from board;
+
+desc users;
+
+select * from board order by bno DESC;
