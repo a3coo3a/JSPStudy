@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.myweb.board.service.BoardService;
 import com.myweb.board.service.ContentServiceImpl;
+import com.myweb.board.service.DeleteServiceImpl;
 import com.myweb.board.service.GetListServiceImpl;
 import com.myweb.board.service.RegistServiceImpl;
+import com.myweb.board.service.UpHitServiceImpl;
+import com.myweb.board.service.UpdateServiceImpl;
 
 //1. 글 컨트롤러
 @WebServlet("*.board")
@@ -37,7 +40,7 @@ public class BoradController extends HttpServlet {
 		// 2. 요청분기
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
-		String command = uri.substring(conPath.length());
+		String command = uri.substring(conPath.length());  //uri-conPath
 		
 		System.out.println(command);
 		
@@ -57,6 +60,7 @@ public class BoradController extends HttpServlet {
 		}else if(command.equals("/board/write.board")) {// 글 화면 요청
 			
 			request.getRequestDispatcher("board_write.jsp").forward(request, response);
+			
 		}else if(command.equals("/board/regist.board")) {// 글 등록 요청
 			//서비스 영역에게
 		
@@ -65,9 +69,14 @@ public class BoradController extends HttpServlet {
 			response.sendRedirect("list.board");     // 다시 컨트롤러를 태워보내는 형식
 		
 		}else if(command.equals("/board/content.board")) {
+			// 조회수 관련 작업
+			service = new UpHitServiceImpl();
+			service.execute(request, response);
+			
 			service = new ContentServiceImpl();
 			service.execute(request, response);
 			request.getRequestDispatcher("board_content.jsp").forward(request, response);
+			
 			
 		}else if(command.equals("/board/modify.board")) {
 			// 1. ContentServiceImpl()를 재활용합니다.
@@ -78,7 +87,45 @@ public class BoradController extends HttpServlet {
 			service.execute(request, response);
 			request.getRequestDispatcher("board_modify.jsp").forward(request, response);
 		
+		}else if(command.equals("/board/update.board")) {
+			
+			//System.out.println(request.getParameter("bno"));		//disable이라서 값이 넘어오지 않고  null이 됨.
+			//System.out.println(request.getParameter("writer"));	//disable이라서 값이 넘어오지 않고  null이 됨.
+			//System.out.println(request.getParameter("title"));
+			
+			/*
+			 * 1. UpdateServiceImpl()를 생성하고, execute()메서드 실행
+			 * 2. 서비스에서 bno, title,,content를 받아서 DAO의  update() 메서드를 실행
+			 * 3. update()는  sql문으로 수정을 진행
+			 * 4. 컨트롤러에서는 페이지 이동을 content화면으로 이동
+			 */
+			
+			service = new UpdateServiceImpl();
+			service.execute(request, response);
+			//request.getRequestDispatcher("board_content.jsp").forward(request, response);
+			response.sendRedirect("content.board?bno="+ request.getParameter("bno") );
+		} else if(command.equals("/board/delete.board")) {
+			/*
+			 * 1. 화면에서  delete.board요청으로 필요한 값을  get방식으로 넘겨줍니다.
+			 * 2. DeleteServiceImpl() 생성하고  dao의  delete()메서드 실행
+			 * 3. 삭제 진행 후에 목록페이지로 이동
+			 */
+			
+			service = new DeleteServiceImpl();
+			service.execute(request, response);
+			response.sendRedirect("list.board");
+			
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	}
 }

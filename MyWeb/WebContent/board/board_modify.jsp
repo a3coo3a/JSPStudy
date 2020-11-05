@@ -5,22 +5,25 @@
 	<h3>게시판 글 수정 페이지</h3>
 	<hr>
 	
-	<form action="" method="post">
+	<form action="update.board" method="post">
+		<!-- 화면에 보이지는 않지만, 반드시 넘겨줘야 되는 값을 숨겨서 보낼 때  hidden을 사용합니다. -->
+		<input type="hidden" name="bno" value="${vo.bno }">
+		<input type="hidden" name="writer" value="${vo.writer }">
 		
 		<table border="1" width="500">
 			
 			<tr>
 				<td>글 번호</td>
-				<td>${vo.bno }</td>
+				<td><input type="text" name="bno" value="${vo.bno }" disabled></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td>${vo.writer }</td>
+				<td><input type="text" name="writer" value="${vo.writer }" disabled></td>
 			</tr>
 			<tr>
 				<td>글 제목</td>
 				<td>
-					<input type="text" name="title" value="${vo.title }">
+					<input type="text" name="title" value="${vo.title }" required>
 				</td>
 			</tr>
 			<tr>
@@ -33,8 +36,8 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="수정 하기" >&nbsp;&nbsp;
-					<input type="button" value="목록">        
+					<input type="submit" value="수정 하기">&nbsp;&nbsp;
+					<input type="button" value="목록" onclick="location.href='list.board'">        
 				</td>
 			</tr>
 			

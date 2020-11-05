@@ -15,6 +15,16 @@
 
 <div class="container">
 	<h3>My Web게시판</h3>
+	
+	<div>
+		<select onchange="change(this)">				<!-- this : 태그 나자신 -->
+			<option value="10" ${pagevo.amount == 10? 'selected':'' }>10개씩 보기</option>
+			<option value="20" ${pagevo.amount == 20? 'selected':'' }>20개씩 보기</option>
+			<option value="50" ${pagevo.amount == 50? 'selected':'' }>50개씩 보기</option>
+			<option value="100" ${pagevo.amount == 100? 'selected':'' }>100개씩 보기</option>
+		</select>
+	</div>
+	
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -42,14 +52,26 @@
 				<tr>
 					<td colspan="5" align="center">
 	               			<ul class="pagination pagination-sm">
-                        		<li><a href="#">이전</a></li>
-                        		<li  class="active"><a href="#">1</a></li>
-                        		<li><a href="#">2</a></li>
-                        		<li><a href="#">3</a></li>
-                        		<li><a href="#">4</a></li>
-                        		<li><a href="#">5</a></li>
-                        		<li><a href="#">다음</a></li>
-                    			</ul>
+                        		
+                        		<!-- 
+                        			1. 페이지 번호처리
+                        			2. li액티브 여부
+                        			3. 이전 버튼 활성화 여부
+                        			4. 다음 버튼 활성화 여부
+                        		 -->
+                        		
+                        		<c:if test="${pagevo.prev }">
+                        			<li><a href="list.board?pageNum=${pagevo.startPage-1 }&amount=${pagevo.amount}">이전</a></li>
+                        		</c:if>
+                        		
+                        		<c:forEach var="num" begin="${pagevo.startPage }" end="${pagevo.endPage }" >
+                        			<li class="${num eq pagevo.pageNum ? 'active': ''}">
+                        			<a href="list.board?pageNum=${num }&amount=${pagevo.amount}">${num }</a></li>
+                        		</c:forEach>
+                        		<c:if test="${pagevo.next }">
+                        			<li><a href="list.board?pageNum=${pagevo.endPage + 1 }&amount=${pagevo.amount}">다음</a></li>
+                    			</c:if>
+                    		</ul>
 					<input type="button" value="글 작성" class="btn btn-default pull-right" onclick="location.href='write.board'">
 					
 					</td>
@@ -59,4 +81,16 @@
 		</table>
 	</div>
 
+<script>
+	function change(a) {
+		//console.log(a)
+		//console.log(a.value)
+		location.href="list.board?pageNum=1&amount="+a.value;
+	}
+
+</script>
 <%@include file="../include/footer.jsp" %>
+
+
+
+
