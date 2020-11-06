@@ -64,7 +64,7 @@
                         <a href="<%=request.getContextPath() %>">HOME</a>
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath() %>/member/member.jsp">Member</a>
+                        <a href="<%=request.getContextPath() %>/member/member.user">Member</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/board/list.board">BOARD</a>
@@ -72,18 +72,18 @@
                     <c:choose>
 	                    <c:when test="${sessionScope.login == null}">
 		                    <li>
-		                        <a href="${pageContext.request.contextPath }/user/login.jsp">LOGIN</a>
+		                        <a href="${pageContext.request.contextPath }/user/login.user">LOGIN</a>
 		                    </li>
 		                    <li>
-		                        <a href="<%=request.getContextPath() %>/user/join.jsp" style="color:red">JOIN</a>
+		                        <a href="<%=request.getContextPath() %>/user/join.user" style="color:red">JOIN</a>
 		                    </li>
 	                    </c:when>
 	                    <c:otherwise>
 		                    <li>
-		                        <a href="<%=request.getContextPath() %>/user/logout.jsp">LOGOUT</a>
+		                        <a href="<%=request.getContextPath() %>/user/logout.user">LOGOUT</a>
 		                    </li>
 		                    <li>
-		                        <a href="<%=request.getContextPath() %>/user/mypage.jsp">MYPAGE</a>
+		                        <a href="<%=request.getContextPath() %>/user/mypage.user">MYPAGE</a>
 		                    </li>
 	                    </c:otherwise>
                     </c:choose>

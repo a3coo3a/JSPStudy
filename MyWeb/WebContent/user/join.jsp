@@ -6,7 +6,8 @@
 	<div align="center">
 		<h2>회원가입 연습</h2>
 		<hr>
-		<form name="regForm" action="join_ok.jsp" method="post">
+		
+		<form name="regForm" action="joinForm.user" method="post">
 			<table>	
 				<tr>
 					<td>아이디 : </td>
@@ -44,8 +45,11 @@
 						<input type="text" name="address">
 					</td>
 				</tr>
-			</table>
+			</table>			
 			<br/>
+			
+			<p>${msg }</p>
+			
 			<input type="button" value="가입" class="btn btn-default" onclick="check()">
 			<input type="button" value="로그인" class="btn btn-primary" onclick="location.href='login.jsp'">
 		</form>

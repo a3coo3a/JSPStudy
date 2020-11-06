@@ -10,7 +10,7 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-					<input type="text" name="writer" size="10" required />
+					<input type="text" name="writer" value="${sessionScope.login.id}" size="10" required readonly/>
 					 <!--<input type="text" name="writer" size="10" pattern="[A-Za-z가-힇0-9]{3}"  required />-->
 				</td>
 			</tr>

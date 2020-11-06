@@ -1,18 +1,17 @@
-<%@page import="com.myweb.user.model.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
+<%@include file="../include/header.jsp" %>
 
 <section>
 	<div align="center">
-		<h2>회원정보 수정연습</h2>
+		<h2>회원가입 연습</h2>
 		<hr>
-		<form name="regForm" action="updateForm.user" method="post">
+		<form name="regForm" action="join_ok.jsp" method="post">
 			<table>	
 				<tr>
 					<td>아이디 : </td>
 					<td>
-						<input type="text" name="id" value="${sessionScope.login.id }" readonly>
+						<input type="text" name="id" placeholder="4글자 이상">
 					</td>
 				</tr>
 				<tr>
@@ -30,29 +29,29 @@
 				<tr>
 					<td>이름 : </td>
 					<td>
-						<input type="text" name="name" value="${sessionScope.login.name }">
+						<input type="text" name="name">
 					</td>
 				</tr>
 				<tr>
 					<td>이메일 : </td>
 					<td>
-						<input type="email" name="email" value="${sessionScope.login.email }">
+						<input type="email" name="email">
 					</td>
 				</tr>
 				<tr>
 					<td>주소 : </td>
 					<td>
-						<input type="text" name="address" value="${sessionScope.login.address }">
+						<input type="text" name="address">
 					</td>
 				</tr>
 			</table>
 			<br/>
-			<input type="button" value="정보 수정" class="btn btn-default" onclick="check()">
-			<input type="button" value="취소" class="btn btn-primary" onclick="history.go(-1)">
+			<input type="button" value="가입" class="btn btn-default" onclick="check()">
+			<input type="button" value="로그인" class="btn btn-primary" onclick="location.href='login.jsp'">
 		</form>
 	</div>
 </section>
-<%@ include file="../include/footer.jsp" %>
+
 <script>
 <%-- java 의 함수와 동일한데 반환유형이 없음--%>
 	function check(){
@@ -79,7 +78,8 @@
 		}
 		
 		
-		
-		
 	}
 </script>
+
+
+<%@ include file="../include/footer.jsp"%>

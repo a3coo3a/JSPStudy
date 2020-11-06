@@ -104,6 +104,7 @@ public class BoradController extends HttpServlet {
 			service.execute(request, response);
 			//request.getRequestDispatcher("board_content.jsp").forward(request, response);
 			response.sendRedirect("content.board?bno="+ request.getParameter("bno") );
+			
 		} else if(command.equals("/board/delete.board")) {
 			/*
 			 * 1. 화면에서  delete.board요청으로 필요한 값을  get방식으로 넘겨줍니다.
