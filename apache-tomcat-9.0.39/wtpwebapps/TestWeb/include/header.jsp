@@ -24,15 +24,15 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="##" style="margin-right: 10px;">메인</a></li>
-                <li><a href="##">게시판</a></li>
+                <li><a href="bbs.bbs">게시판</a></li>
             </ul>
             
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">로그인</a></li>
-                        <li><a href="#">회원가입</a></li>
+                        <li><a href="login.user">로그인</a></li>
+                        <li><a href="join.user">회원가입</a></li>
                     </ul>
                 </li>
             </ul>

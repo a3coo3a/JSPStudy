@@ -115,3 +115,17 @@
 0:0:0:0:0:0:0:1 - - [07/Nov/2020:22:38:02 +0900] "GET /TestWeb/user/user_mypage.jsp HTTP/1.1" 200 5126
 0:0:0:0:0:0:0:1 - - [07/Nov/2020:22:39:57 +0900] "GET /TestWeb/user_mypageinfo.html HTTP/1.1" 200 5514
 0:0:0:0:0:0:0:1 - - [07/Nov/2020:22:40:07 +0900] "GET /TestWeb/user/user_mypageinfo.jsp HTTP/1.1" 200 5604
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:22:48:20 +0900] "GET /TestWeb/index.jsp HTTP/1.1" 200 4022
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:22:48:20 +0900] "GET /js/bootstrap.js HTTP/1.1" 404 826
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:22:48:20 +0900] "GET /js/bootstrap.js HTTP/1.1" 404 826
+127.0.0.1 - - [07/Nov/2020:23:07:27 +0900] "GET / HTTP/1.1" 200 11415
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:07:28 +0900] "GET /TestWeb/user/user_join.jsp HTTP/1.1" 200 6157
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:08:37 +0900] "GET /TestWeb/user/user_mypage.jsp HTTP/1.1" 200 5126
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:08:53 +0900] "GET /TestWeb/user/user_mypageinfo.jsp HTTP/1.1" 200 5604
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:09:18 +0900] "GET /TestWeb/user/user_join.jsp HTTP/1.1" 200 6157
+127.0.0.1 - - [07/Nov/2020:23:28:46 +0900] "GET / HTTP/1.1" 200 11415
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:28:47 +0900] "GET /TestWeb/bbs/bbs.jsp HTTP/1.1" 200 4947
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:32:14 +0900] "GET /TestWeb/bbs/bbs_write.jsp HTTP/1.1" 200 3905
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:32:48 +0900] "GET /TestWeb/bbs/bbs_content.jsp HTTP/1.1" 200 4074
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:33:23 +0900] "GET /TestWeb/bbs/bbs.jsp HTTP/1.1" 200 4947
+0:0:0:0:0:0:0:1 - - [07/Nov/2020:23:35:18 +0900] "GET /TestWeb/bbs/bbs_content.jsp HTTP/1.1" 200 4074
