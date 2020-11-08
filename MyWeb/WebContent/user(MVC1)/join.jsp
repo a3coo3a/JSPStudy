@@ -58,7 +58,7 @@
 		//form 는 유일하게  document.form이름.이름...  접근이 가능합니다
 		//console.log(document.regForm.id);
 		//console.log(document.regForm.id.name);
-		//console.log(document.regForm.id.value);
+		console.log(document.regForm.id.value);
 		
 		if(document.regForm.id.value.length < 4){	//4자리 이상 필수
 			alert('아이디는 필수 입니다.');

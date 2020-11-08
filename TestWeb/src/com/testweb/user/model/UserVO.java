@@ -6,7 +6,7 @@ public class UserVO {
 	private String id;
 	private String pw;
 	private String name;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String email;
 	private String basicAddress;
 	private String detailAddress;
@@ -15,7 +15,7 @@ public class UserVO {
 	public UserVO() {
 	}
 
-	public UserVO(String id, String pw, String name, int phoneNumber, String email, String basicAddress,
+	public UserVO(String id, String pw, String name, String phoneNumber, String email, String basicAddress,
 			String detailAddress, Timestamp regdate) {
 		super();
 		this.id = id;
@@ -52,11 +52,11 @@ public class UserVO {
 		this.name = name;
 	}
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

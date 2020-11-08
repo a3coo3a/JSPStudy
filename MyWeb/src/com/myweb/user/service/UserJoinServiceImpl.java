@@ -16,7 +16,9 @@ public class UserJoinServiceImpl implements UserService {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
-				
+		
+		System.out.println(id);
+		
 		UserDAO dao = UserDAO.getInstance();
 		//아이디 중복검사
 		int result = dao.checkId(id);	//중복시 1, 중복아니면 0

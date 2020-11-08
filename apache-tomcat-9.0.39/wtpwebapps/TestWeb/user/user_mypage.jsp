@@ -11,23 +11,24 @@
                         MEMBER                   
                     </div>
                     <div>
-                        <p>xx님 회원정보</p>
+                        <p>${sessionScope.user.name}님 회원정보</p>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary">회원정보변경</button>
-                        <button type="button" class="btn btn-primary" id="delCheck">회원 탈퇴</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='mypageinfo.user'">회원정보변경</button>
+                        <button type="button" class="btn btn-primary" id="delCheck" >회원 탈퇴</button>
                         
                     </div>
                     <div class="delete-hidden">
-                        <form>
-                        <input type="password" class="form-control" placeholder="비밀번호를 입력하세요">
-                        <button type="button" class="btn btn-primary" >확인</button>
+                        <form name="pwForm" action="delete.user" method="post">
+                        <input name="pw" type="password" class="form-control" placeholder="비밀번호를 입력하세요">
+                        <button type="submit" class="btn btn-primary">확인</button>
                         </form>
                     </div>
-                    
+                    <br>
+                    <span>${msg }</span>
                     <br>
                     <div>
-                        <p>xx님의 작성 게시물</p>
+                        <p>${sessionScope.user.name}님의 작성 게시물</p>
                         <table class="table table-striped" style="text-align: center; border: 2px solid #737373">
                     <thead>
                         <tr>
@@ -64,6 +65,7 @@
         </div>
 
     </section>
+ 
 <%@ include file="../include/footer.jsp" %>
 
    <script>
@@ -77,4 +79,6 @@
                 del.style.display = "none";
             }
         }
+        
+	
     </script>
