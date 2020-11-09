@@ -8,17 +8,20 @@ public class BbsVO {
 	private String title;
 	private String content;
 	private Timestamp regdate;
+	private String id;
 	
 	public BbsVO() {
 	}
 
-	public BbsVO(int bno, String writer, String title, String content, Timestamp regdate) {
+	public BbsVO(int bno, String writer, String title, String content, Timestamp regdate, String id) {
 		super();
 		this.bno = bno;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
 		this.regdate = regdate;
+		this.id = id;
+		
 	}
 
 	public int getBno() {
@@ -60,6 +63,12 @@ public class BbsVO {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
-	
+	public String getId() {
+		return content;
+	}
+
+	public void setID(String id) {
+		this.id = id;
+	}
 	
 }

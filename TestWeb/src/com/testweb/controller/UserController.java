@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.testweb.user.service.UserDeleteServiceImpl;
 import com.testweb.user.service.UserJoinServiceImpl;
 import com.testweb.user.service.UserLoginServiceImpl;
+import com.testweb.user.service.UserMypageContentServiceImpl;
 import com.testweb.user.service.UserService;
 import com.testweb.user.service.UserUpdateServiceImpl;
 
@@ -48,7 +49,14 @@ public class UserController extends HttpServlet {
 		}else if (command.equals("/user/join.user")) {	// 화면처리
 			request.getRequestDispatcher("user_join.jsp").forward(request, response);
 		}else if (command.equals("/user/mypage.user")) {		// 화면처리
-			request.getRequestDispatcher("user_mypage.jsp").forward(request, response);
+			
+			service = new UserMypageContentServiceImpl();
+			int result = service.execute(request, response);
+			if(result == 1) {
+				request.getRequestDispatcher("user_mypage.jsp").forward(request, response);
+			}
+			
+			
 		}else if (command.equals("/user/mypageinfo.user")) {
 			request.getRequestDispatcher("user_mypageinfo.jsp").forward(request, response);
 		}else if (command.equals("/user/joinForm.user")) {		// 회원가입 처리
@@ -58,7 +66,7 @@ public class UserController extends HttpServlet {
 			if(result == 2) {
 				System.out.println("sql삽입 실패");
 			}else if(result == 1) {
-				request.setAttribute("msg", "이미 존재하는 아이디입니다./r/n다시 가입해주세요");
+				request.setAttribute("msg", "이미 존재하는 아이디입니다. 다시 가입해주세요");
 				request.getRequestDispatcher("user_join.jsp").forward(request, response);
 			}else if(result == 0) {
 				response.sendRedirect("login.user");
@@ -94,6 +102,11 @@ public class UserController extends HttpServlet {
 				request.setAttribute("msg", "수정에 실패 하였습니다.");
 				request.getRequestDispatcher("user_mypageinfo.jsp").forward(request, response);
 			}
+		}else if(command.equals("/user/logout.user")) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			response.sendRedirect(request.getContextPath());
+			
 		}
 			
 	}

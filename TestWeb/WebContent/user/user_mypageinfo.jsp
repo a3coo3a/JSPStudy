@@ -19,15 +19,15 @@
                         <tbody class="m-control">
                             <tr>
                                 <td class="m-title">*ID</td>
-                                <td><input type="text" name="id" class="form-control input-sm" value="${sessionScope.user.id }" readonly></td>
+                                <td><input type="text" name="id" id="id" class="form-control input-sm" value="${sessionScope.user.id }" readonly></td>
                             </tr>
                             <tr>
                                 <td class="m-title">*이름</td>
-                                <td><input type="text" name="name"  class="form-control input-sm" value="${sessionScope.user.name }" required></td>
+                                <td><input type="text" name="name" class="form-control input-sm" value="${sessionScope.user.name }" required></td>
                             </tr>
                             <tr>
                                 <td class="m-title">*비밀번호</td>
-                                <td><input name="pw" type="password" class="form-control input-sm" required></td>
+                                <td><input name="pw" type="password" id="pw" class="form-control input-sm" required></td>
                             </tr>
                             <tr>
                                 <td class="m-title">*비밀번호확인</td>
@@ -70,8 +70,8 @@
                     </table>
                     
                     <div class="titlefoot">
-                        <button class="btn" onclick="check()">수정</button>
-                        <button class="btn" onclick="location.href='user.mypage'">목록</button>
+                        <button type="button" class="btn" onclick="check()">수정</button>
+                        <button type="button" class="btn" onclick="location.href='user.mypage'">목록</button>
                     </div>
                     </form>
                 </div>
@@ -89,10 +89,7 @@
 		var idReg = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,12}$/;
 		var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 			
-		if(!idReg.test(document.getElementById('id').value)){
-			alert('아이디가 잘못 입력되었습니다.');
-			return;		
-		}else if(!pwReg.test(document.updateForm.pw.value)){  
+		if(!pwReg.test(document.getElementById('pw').value)){  
 			alert('비밀번호가 잘못 입력되었습니다.');
 			return;		
 		}else if(document.updateForm.pw.value != document.updateForm.pwCheck.value){
@@ -101,7 +98,7 @@
 		}else if(document.updateForm.name.value == ''){
 			alert('이름은 필수 입니다.');
 			return;
-		}else if(document.updateForm.beEmail.value == ''){
+		}else if(document.updateForm.beEmail.value == ''){ss
 			alert('email은 필수 입니다.');
 			return;
 		}else if(document.updateForm.basicAddress.value == '' || document.updateForm.detailAddress.value == ''){

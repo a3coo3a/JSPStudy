@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.apache.catalina.valves.JDBCAccessLogValve;
@@ -164,6 +166,8 @@ public class UserDAO {
 		}
 		return result;
 	}
+
+	
 	
 	
 	

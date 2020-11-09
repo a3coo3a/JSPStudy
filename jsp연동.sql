@@ -70,3 +70,79 @@ from (
              from board 
              order by bno desc)
 ) where rn > 10 and rn <=20;
+
+
+-- È¸¿ø Å×ÀÌºí »ı¼º --
+create table users (
+    id VARCHAR2(50) PRIMARY KEY,
+    pw VARCHAR2(50) not null,
+    name VARCHAR2(50) not null,
+    phoneNumber VARCHAR2(50) not null,
+    email VARCHAR2(100) not null,
+    basicAddress VARCHAR2(200) not null,
+    detailAddress VARCHAR2(200) not null,
+    regdate date DEFAULT sysdate
+);
+
+s
+
+DROP table bbs;
+-- °Ô½ÃÆÇ Å×ÀÌºí »ı¼º --
+create table bbs (
+    bno number(20,0) PRIMARY KEY,
+    writer VARCHAR2(50) not null,
+    title VARCHAR2(100) not null,
+    content VARCHAR2(2000),
+    regdate DATE DEFAULT sysdate,
+    id VARCHAR2(50)
+);
+
+create SEQUENCE bbs_seq START with 1 INCREMENT by 1 NOCACHE;
+
+select * from bbs;
+
+ALTER TABLE bbs
+ADD (id VARCHAR2(50));
+
+
+ÃâÃ³: https://hyeonstorage.tistory.com/292 [°³¹ßÀÌ ÇÏ°í ½Í¾î¿ä]
+
+DECLARE
+    var1 number := bbs_seq.nextval;
+begin
+    while var1 <= 300
+    loop
+        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test1', 'test1', 'test1', 'ro');
+        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test02', 'test02', 'test02', '°³¶ËÀÌ');
+        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test3', 'test3', 'test3', '¶Ë¶ËÀÌ');
+        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test04', 'test04', 'test04', 'hello');
+        var1 := var1 + 1;
+    end loop;
+    commit;
+end;
+
+     insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test1', 'test1', 'test1', 'ro');
+        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test02', 'test02', 'test02', '°³¶ËÀÌ');
+        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test3', 'test3', 'test3', '¶Ë¶ËÀÌ');
+        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test04', 'test04', 'test04', 'hello');
+commit;
+
+
+select *
+from (
+    select rownum rn, 
+             bno,
+             writer,
+             title,
+             content,
+             regdate
+    from (select * 
+             from bbs 
+             order by bno desc)
+) where rn > 0 and rn <=10;
+
+select * from bbs;
+select * from users;
+
+select * from bbs b left join 
+users u on u.name = b.writer;
