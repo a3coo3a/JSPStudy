@@ -58,7 +58,9 @@ public class UserController extends HttpServlet {
 			
 			
 		}else if (command.equals("/user/mypageinfo.user")) {
+			
 			request.getRequestDispatcher("user_mypageinfo.jsp").forward(request, response);
+			
 		}else if (command.equals("/user/joinForm.user")) {		// 회원가입 처리
 			service = new UserJoinServiceImpl();
 			int result = service.execute(request, response);  // 중복회원 존재시 1, 아니면 0
@@ -91,7 +93,9 @@ public class UserController extends HttpServlet {
 				response.sendRedirect(request.getContextPath());
 			}else if(result == 0) {
 				request.setAttribute("msg", "비밀번호가 틀렸습니다. 다시 입력해주세요");
-				request.getRequestDispatcher("user_mypage.jsp").forward(request, response);
+				if(new UserMypageContentServiceImpl().execute(request, response) == 1) {
+					request.getRequestDispatcher("user_mypage.jsp").forward(request, response);
+				}
 			}
 		}else if(command.equals("/user/modify.user")) {  // 회원 정보 수정
 			service = new UserUpdateServiceImpl();

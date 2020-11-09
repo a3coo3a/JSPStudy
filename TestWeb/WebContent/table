@@ -18,8 +18,7 @@ create table bbs (
     writer VARCHAR2(50) not null,
     title VARCHAR2(100) not null,
     content VARCHAR2(2000),
-    regdate DATE DEFAULT sysdate,
-    id VARCHAR2(50)
+    regdate DATE DEFAULT sysdate
 );
 
 create SEQUENCE bbs_seq START with 1 INCREMENT by 1 NOCACHE;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="include/header.jsp" %>
         <!--메인만 적용되는 css영역-->   
         <style>
@@ -34,14 +35,16 @@
                         <th style="background-color: #9DCAFF; text-align: center;">작성일</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a>Test</a></td>
-                        <td>Min</td>
-                        <td>2019-09-14 08:05</td>
-                    </tr>
-                </tbody>
+                <c:forEach var="list" items="${list }">
+                    <tbody>
+                        <tr>
+                            <td>${list.bno }</td>
+                            <td><a href="<%=request.getContextPath() %>/bbs/content.bbs?bno=${list.bno }">${list.title }</a></td>
+                            <td>${list.writer }</td>
+                            <td><fmt:formatDate value="${list.regdate }" pattern="yyyy-MM-dd HH:mm"/> </td>
+                        </tr>
+                    </tbody>
+                    </c:forEach>
             </table>
         </div>
         

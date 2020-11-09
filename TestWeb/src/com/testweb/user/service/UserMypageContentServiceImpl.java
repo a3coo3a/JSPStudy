@@ -18,12 +18,11 @@ public class UserMypageContentServiceImpl implements UserService {
 		int result = 0;
 		
 		UserVO vo = (UserVO)session.getAttribute("user");
-		String writer = vo.getName();
-		String id = vo.getId();
+		String writer = vo.getId();
 
 		BbsDAO dao = BbsDAO.getInstance();
 		
-		ArrayList<BbsVO> bvo = dao.getMyContent(writer, id);
+		ArrayList<BbsVO> bvo = dao.getMyContent(writer);
 		
 		if(vo != null) {
 			request.setAttribute("myCon", bvo);

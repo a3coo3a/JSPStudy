@@ -37,9 +37,9 @@ public class BbsDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	public int write(String writer, String title, String content, String id) {
+	public int write(String writer, String title, String content) {
 		int result = 0;
-		String sql = "insert into bbs(bno, writer, title, content, id) values(bbs_seq.nextval,?,?,?,?)";
+		String sql = "insert into bbs(bno, writer, title, content) values(bbs_seq.nextval,?,?,?)";
 		
 		try {
 			conn = ds.getConnection();
@@ -47,7 +47,6 @@ public class BbsDAO {
 			pstmt.setString(1, writer);
 			pstmt.setString(2, title);
 			pstmt.setString(3, content);
-			pstmt.setString(4, id);
 			
 			result = pstmt.executeUpdate();
 			
@@ -70,8 +69,7 @@ public class BbsDAO {
 				"             writer,\n" + 
 				"             title,\n" + 
 				"             content,\n" + 
-				"             regdate,\n" + 
-				"             id \n" + 
+				"             regdate\n" + 
 				"    from (select * \n" + 
 				"             from bbs \n" + 
 				"             order by bno desc)\n" + 
@@ -91,9 +89,8 @@ public class BbsDAO {
 				String title = rs.getString("title"); 
 				String content = rs.getString("content");
 				Timestamp regdate = rs.getTimestamp("regdate");
-				String id = rs.getString("id");
 				
-				list.add(new BbsVO(bno, writer, title, content, regdate, id));
+				list.add(new BbsVO(bno, writer, title, content, regdate));
 			}
 			
 		} catch (Exception e) {
@@ -136,7 +133,7 @@ public class BbsDAO {
 			pstmt.setString(1, bno);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				vo = new BbsVO(rs.getInt("bno"), rs.getString("writer"), rs.getString("title"), rs.getString("content"), rs.getTimestamp("regdate"), rs.getString("id"));
+				vo = new BbsVO(rs.getInt("bno"), rs.getString("writer"), rs.getString("title"), rs.getString("content"), rs.getTimestamp("regdate"));
 			}
 			
 			
@@ -173,14 +170,13 @@ public class BbsDAO {
 		return result;
 	}
 
-	public ArrayList<BbsVO> getMyContent(String writer, String id) {
+	public ArrayList<BbsVO> getMyContent(String writer) {
 		ArrayList<BbsVO> list = new ArrayList<>();
-		String sql = "select * from bbs where writer=? and id=?";
+		String sql = "select * from bbs where writer=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, writer);
-			pstmt.setString(2, id);
 			
 			rs = pstmt.executeQuery();
 			
@@ -191,7 +187,7 @@ public class BbsDAO {
 				String content = rs.getString("content");
 				Timestamp regdate = rs.getTimestamp("regdate");
 				
-				list.add(new BbsVO(bno, wri, title, content, regdate, id));
+				list.add(new BbsVO(bno, wri, title, content, regdate));
 			}
 			
 			
@@ -205,12 +201,11 @@ public class BbsDAO {
 
 	public int delete(String bno, String id) {
 		int result = 0;
-		String sql = "delete from bbs where bno=? and id=?";
+		String sql = "delete from bbs where bno=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bno);
-			pstmt.setString(2, id);
 			
 			result = pstmt.executeUpdate();
 			
@@ -221,6 +216,46 @@ public class BbsDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<BbsVO> mainbbs() {
+		ArrayList<BbsVO> list = new ArrayList<BbsVO>();
+		String sql = "select * \r\n"
+				+ "from (\r\n"
+				+ "    select rownum rn, \r\n"
+				+ "           bno, \r\n"
+				+ "           writer, \r\n"
+				+ "           title, \r\n"
+				+ "           content, \r\n"
+				+ "           regdate \r\n"
+				+ "           from (select * \r\n"
+				+ "                  from bbs \r\n"
+				+ "                  order by bno desc) \r\n"
+				+ "    ) where rn > 0 and rn <= 10";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int bno = rs.getInt("bno");
+				String writer = rs.getString("writer");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				Timestamp regdate = rs.getTimestamp("regdate");
+				
+				list.add(new BbsVO(bno, writer, title, content, regdate));
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn, pstmt, rs);
+		}
+		
+		return list;
 	}
 	
 	

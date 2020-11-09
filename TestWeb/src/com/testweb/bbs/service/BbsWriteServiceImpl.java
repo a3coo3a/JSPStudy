@@ -24,7 +24,7 @@ public class BbsWriteServiceImpl implements BbsService {
 		
 		BbsDAO dao = BbsDAO.getInstance();
 	
-		int result = dao.write(writer, title, content, id);
+		int result = dao.write(writer, title, content);
 	
 		return result;
 	}

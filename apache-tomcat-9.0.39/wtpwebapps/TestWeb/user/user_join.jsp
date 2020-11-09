@@ -32,30 +32,33 @@
                     <form name="regForm" action="joinForm.user" method="post">
                         <div class="form-group">
                             <label for="id">아이디</label>
-                            <input type="text" name="id" class="form-control" id="id" placeholder="아이디를 (영문포함 4~12자 이상)">
+                            <input type="text" name="id" class="form-control" id="id" placeholder="아이디를 (영문포함 4~12자 이상)" onkeyup="checkId()">
+                            <span id="checkId"></span>
                         </div>
                         <div class="form-group">
                             <label for="password">비밀번호</label>
-                            <input type="password" name="pw" class="form-control" id="password" placeholder="비밀번호 (영 대/소문자, 숫자, 특수문자 3종류 이상 조합 8자 이상)">
+                            <input type="password" name="pw" class="form-control" id="password" placeholder="비밀번호 (영 대/소문자, 숫자, 특수문자 3종류 이상 조합 8자 이상)" onkeyup="checkPw()">
+                        	<span id="checkPw"></span>
                         </div>
                         <div class="form-group">
                             <label for="password-confrim">비밀번호 확인</label>
-                            <input type="password"  name="pwCheck" class="form-control" id="password-confrim" placeholder="비밀번호를 확인해주세요.">
+                            <input type="password"  name="pwCheck" class="form-control" id="password-confrim" placeholder="비밀번호를 확인해주세요." onkeyup="matchCheckPW()">
+                            <span id="matchCheckPw"></span>
                         </div>
                         <div class="form-group">
                             <label for="name">이름</label>
                             <input type="text" name="name" class="form-control" id="name" placeholder="이름을 입력하세요." required>
+                            <span id="checkName"></span>
                         </div>
                         <!--input2탭의 input-addon을 가져온다 -->
                         <div class="form-group">
                             <label for="hp">휴대폰번호</label><br>
                             
-                            <input name="phoneNum1" class="form-control sel" placeholder="010"> -
-                            <input name="phoneNum2" class="form-control sel" placeholder="xxxx"> -
-                            <input name="phoneNum3" class="form-control sel" placeholder="xxxx">
-                        
-                        </div
-                        >
+                            <input name="phoneNum1" class="form-control sel" placeholder="010" onKeyPress="return checkNum(event)">
+                            <input name="phoneNum2" class="form-control sel" placeholder="xxxx" onKeyPress="return checkNum(event)"> -
+                            <input name="phoneNum3" class="form-control sel" placeholder="xxxx" onKeyPress="return checkNum(event)"><br/>
+                        <span id="checkNum"></span>
+                        </div>
                         <div class="form-group">
                              <label for="hp">이메일</label><br>
                             <input name="beEmail" class="form-control sel" required>@
@@ -88,27 +91,61 @@
     </section>    
     
 <script>
-
-	function check(){
-		var idReg = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,12}$/;
-		var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-			
+	function checkId() {
+		var idReg = /^(?=.*[A-Za-z])[가-힣A-Za-z0-9]{4,12}$/;
+		
 		if(!idReg.test(document.getElementById('id').value)){
-			alert('아이디가 잘못 입력되었습니다.');
-			return;		
-		}else if(!pwReg.test(document.regForm.pw.value)){  
-			alert('비밀번호가 잘못 입력되었습니다.');
-			return;		
-		}else if(document.regForm.pw.value != document.regForm.pwCheck.value){
-			alert('비밀번호 확인란을 확인하세요');
-			return;
-		}else if(document.regForm.name.value == ''){
-			alert('이름은 필수 입니다.');
-			return;
+			document.getElementById('checkId').innerHTML = '아이디를 (영문포함 4~12자 이상)이어야 합니다.';
+			document.getElementById('checkId').style.color = 'red';
 		}else{
+			document.getElementById('checkId').innerHTML = '';
+		}
+	}
+	
+	function checkPw() {
+		var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[가-힣A-Za-z\d@$!%*#?&]{8,}$/;
+		
+		if(!pwReg.test(document.getElementById('password').value)){
+			document.getElementById('checkPw').innerHTML = '비밀번호 (영 대/소문자, 숫자, 특수문자 3종류 이상 조합 8자 이상)여야 합니다.';
+			document.getElementById('checkPw').style.color = 'red';
+		}else{
+			document.getElementById('checkPw').innerHTML = '';
+		}
+		
+	}
+	
+	function matchCheckPW(){
+		if(document.getElementById('password').value != document.getElementById('password-confrim').value){
+			document.getElementById('matchCheckPw').innerHTML = '비밀번호가 다릅니다';
+			document.getElementById('matchCheckPw').style.color = 'red';
+		}else if(document.getElementById('password').value == document.getElementById('password-confrim').value){
+			document.getElementById('matchCheckPw').innerHTML = '비밀번호가  같습니다';
+			document.getElementById('matchCheckPw').style.color = 'blue';
+		}
+	}
+	
+	function checkNum(e){
+		var keyVal = event.keyCode;
+		 
+        if(((keyVal >= 48) && (keyVal <= 57))){
+            return true;
+        }
+        else{
+        	document.getElementById('checkNum').innerHTML = '숫자만 입력할 수 있습니다';
+			document.getElementById('checkNum').style.color = 'red';
+            return false;
+        }
+
+	}
+	
+	function check(){
+		if(document.regForm.name.value == '' || document.regForm.name.value == null ){
+			document.getElementById('checkName').innerHTML = '이름은 필수 입니다';
+			document.getElementById('checkName').style.color = 'red';
+		}
+		else{
 			document.regForm.submit();
 		}
- 
 	}
 </script>
 <%@ include file="../include/footer.jsp" %>

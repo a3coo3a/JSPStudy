@@ -35,7 +35,7 @@
                         <th style="background-color: #9DCAFF; text-align: center;">작성일</th>
                     </tr>
                 </thead>
-                <c:forEach var="list" items="${list }" begin="1" end="10">
+                <c:forEach var="list" items="${list }">
                     <tbody>
                         <tr>
                             <td>${list.bno }</td>

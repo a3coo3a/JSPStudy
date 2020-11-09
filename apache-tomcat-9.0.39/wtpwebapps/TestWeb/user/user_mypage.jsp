@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <%@ include file="../include/header.jsp" %>
 <section>
         <div class="container">
@@ -19,14 +21,14 @@
                         
                     </div>
                     <div class="delete-hidden">
-                        <form name="pwForm" action="delete.user" method="post">
+                        <form name="pwChForm" action="delete.user" method="post">
                         <input name="pw" type="password" class="form-control" placeholder="비밀번호를 입력하세요">
                         <button type="submit" class="btn btn-primary">확인</button>
                         </form>
                     </div>
                     <br>
-                    <span>${msg }</span>
-                    <br>
+                    <span style="color: red">${msg }</span>
+                    <br><br>
                     <div>
                         <p>${sessionScope.user.name}님의 작성 게시물</p>
                         <table class="table table-striped" style="text-align: center; border: 2px solid #737373">
@@ -38,21 +40,16 @@
                             <th style="text-align: center;">작성일</th>
                         </tr>
                     </thead>
+                   <c:forEach var="myCon" items="${myCon }" >
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td><a>Test</a></td>
-                            <td>Min</td>
-                            <td>2019-09-14 08:05</td>
+                            <td>${myCon.bno }</td>
+                            <td><a href="<%=request.getContextPath() %>/bbs/content.bbs?bno=${myCon.bno }">${myCon.title }</a></td>
+                            <td>${myCon.writer }</td>
+                            <td><fmt:formatDate value="${myCon.regdate }" pattern="yyyy-MM-dd HH:mm"/> </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a>Lorem Ipsum is simply dummyg industry.</a></td>
-                            <td>MBW</td>
-                            <td>2019-09-15 13:05</td>
-                        </tr>
-
                     </tbody>
+                    </c:forEach>
                 </table>
                     </div>
                     

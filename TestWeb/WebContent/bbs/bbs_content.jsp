@@ -36,7 +36,11 @@
                         <!--구현로직: 버튼은 온클릭을 사용하던 자바스크립트를 이용해야 합니다-->
                         <div class="form-group">
                             <button type="button" class="btn btn-success" onclick="location.href='bbs.bbs'">목록</button>
-                            <button type="button" class="btn btn-info" onclick="location.href='modify.bbs?bno=${bbsCon.bno}'">수정</button>
+                            <c:choose>
+	                    		<c:when test="${sessionScope.user.id == bbsCon.writer}">
+	                            	<button type="button" class="btn btn-info" onclick="location.href='modify.bbs?bno=${bbsCon.bno}'">수정</button>
+	                            </c:when>
+                            </c:choose>
                         </div>
 
                     </form>

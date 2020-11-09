@@ -22,6 +22,7 @@
                 <div class="col-lg-6 col-md-9 col-sm-12 join-form">
                     <h2 align="center">로그인<small>(가운데정렬)</small></h2>
                     
+                    <p align="center">${msg }</p>
                     
                     <form action="loginForm.user" method="post">
                         <div class="form-group">

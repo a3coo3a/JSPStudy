@@ -47,18 +47,18 @@
                         </div>
                         <div class="form-group">
                             <label for="name">이름</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="이름을 입력하세요." onclick="checkName()" required>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="이름을 입력하세요." required>
+                            <span id="checkName"></span>
                         </div>
                         <!--input2탭의 input-addon을 가져온다 -->
                         <div class="form-group">
                             <label for="hp">휴대폰번호</label><br>
                             
-                            <input name="phoneNum1" class="form-control sel" placeholder="010"> -
-                            <input name="phoneNum2" class="form-control sel" placeholder="xxxx"> -
-                            <input name="phoneNum3" class="form-control sel" placeholder="xxxx">
-                        
-                        </div
-                        >
+                            <input name="phoneNum1" class="form-control sel" placeholder="010" onKeyPress="return checkNum(event)">
+                            <input name="phoneNum2" class="form-control sel" placeholder="xxxx" onKeyPress="return checkNum(event)"> -
+                            <input name="phoneNum3" class="form-control sel" placeholder="xxxx" onKeyPress="return checkNum(event)"><br/>
+                        <span id="checkNum"></span>
+                        </div>
                         <div class="form-group">
                              <label for="hp">이메일</label><br>
                             <input name="beEmail" class="form-control sel" required>@
@@ -77,7 +77,7 @@
                             <input type="text" name="detailAddress" class="form-control" id="addr-detail" placeholder="상세주소" required>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-lg btn-success btn-block" onclick="check(); checkId(); matchCheckPW();">회원가입</button>
+                            <button type="button" class="btn btn-lg btn-success btn-block" onclick="check()">회원가입</button>
                         </div>
                         <div class="form-group">
                             <button type="button" class="btn btn-lg btn-info btn-block" onclick="location.href='login.user'">로그인</button>
@@ -91,30 +91,25 @@
     </section>    
     
 <script>
-	var flag = true;
 	function checkId() {
-		var idReg = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,12}$/;
+		var idReg = /^(?=.*[A-Za-z])[가-힣A-Za-z0-9]{4,12}$/;
 		
 		if(!idReg.test(document.getElementById('id').value)){
 			document.getElementById('checkId').innerHTML = '아이디를 (영문포함 4~12자 이상)이어야 합니다.';
 			document.getElementById('checkId').style.color = 'red';
-			flag = false;
 		}else{
 			document.getElementById('checkId').innerHTML = '';
-			flag = true;
 		}
 	}
 	
 	function checkPw() {
-		var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+		var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[가-힣A-Za-z\d@$!%*#?&]{8,}$/;
 		
 		if(!pwReg.test(document.getElementById('password').value)){
 			document.getElementById('checkPw').innerHTML = '비밀번호 (영 대/소문자, 숫자, 특수문자 3종류 이상 조합 8자 이상)여야 합니다.';
-			document.getElementById('checkPw').style.color = '#808080';
-			flag = false;
+			document.getElementById('checkPw').style.color = 'red';
 		}else{
 			document.getElementById('checkPw').innerHTML = '';
-			flag = true;
 		}
 		
 	}
@@ -122,30 +117,33 @@
 	function matchCheckPW(){
 		if(document.getElementById('password').value != document.getElementById('password-confrim').value){
 			document.getElementById('matchCheckPw').innerHTML = '비밀번호가 다릅니다';
-			document.getElementById('matchCheckPw').style.color = '#808080';
-			flag = false;
+			document.getElementById('matchCheckPw').style.color = 'red';
 		}else if(document.getElementById('password').value == document.getElementById('password-confrim').value){
 			document.getElementById('matchCheckPw').innerHTML = '비밀번호가  같습니다';
 			document.getElementById('matchCheckPw').style.color = 'blue';
-			flag = true;
 		}
 	}
+	
+	function checkNum(e){
+		var keyVal = event.keyCode;
+		 
+        if(((keyVal >= 48) && (keyVal <= 57))){
+            return true;
+        }
+        else{
+        	document.getElementById('checkNum').innerHTML = '숫자만 입력할 수 있습니다';
+			document.getElementById('checkNum').style.color = 'red';
+            return false;
+        }
 
-	function checkName(){
-		
-		if(document.regForm.name.value == ''){
-			document.getElementById('checkName').innerHTML = '이름은 필수 입니다';
-			document.getElementById('checkName').style.color = 'red';
-			flag = false;
-		}else{
-			document.getElementById('checkName').innerHTML = '';
-			flag = true;
-		}
- 	
 	}
 	
 	function check(){
-		if(flag == true){
+		if(document.regForm.name.value == '' || document.regForm.name.value == null ){
+			document.getElementById('checkName').innerHTML = '이름은 필수 입니다';
+			document.getElementById('checkName').style.color = 'red';
+		}
+		else{
 			document.regForm.submit();
 		}
 	}

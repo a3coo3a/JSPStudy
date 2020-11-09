@@ -21,14 +21,14 @@
                         
                     </div>
                     <div class="delete-hidden">
-                        <form action="delete.user" method="post">
+                        <form name="pwChForm" action="delete.user" method="post">
                         <input name="pw" type="password" class="form-control" placeholder="비밀번호를 입력하세요">
                         <button type="submit" class="btn btn-primary">확인</button>
                         </form>
                     </div>
                     <br>
-                    <span>${msg }</span>
-                    <br>
+                    <span style="color: red">${msg }</span>
+                    <br><br>
                     <div>
                         <p>${sessionScope.user.name}님의 작성 게시물</p>
                         <table class="table table-striped" style="text-align: center; border: 2px solid #737373">

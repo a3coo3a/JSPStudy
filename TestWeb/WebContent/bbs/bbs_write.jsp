@@ -25,7 +25,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input type="text" class="form-control" value="${sessionScope.user.name }" name="writer" maxlength="50" readonly></td>
+                                <td><input type="text" class="form-control" value="${sessionScope.user.id }" name="writer" maxlength="50" readonly></td>
                                 
                             </tr>
                             <tr>

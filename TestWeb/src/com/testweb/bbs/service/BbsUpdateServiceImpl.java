@@ -24,7 +24,7 @@ public class BbsUpdateServiceImpl implements BbsService {
 		UserVO user = (UserVO)session.getAttribute("user");
 		String id = user.getId();
 		
-		BbsVO vo = new BbsVO(Integer.parseInt(bno), writer, title, content, null, id);
+		BbsVO vo = new BbsVO(Integer.parseInt(bno), writer, title, content, null);
 		
 		int result = dao.update(vo);
 		
