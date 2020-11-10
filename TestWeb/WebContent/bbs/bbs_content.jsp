@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>   
 <%@ include file="../include/header.jsp" %>
      <section>
         <div class="container">
@@ -35,12 +37,14 @@
                         
                         <!--구현로직: 버튼은 온클릭을 사용하던 자바스크립트를 이용해야 합니다-->
                         <div class="form-group">
-                            <button type="button" class="btn btn-success" onclick="location.href='bbs.bbs'">목록</button>
+                            <c:set var="referURL" value="${header.referer}" />
+                            	<button type="button" class="btn btn-success" onclick="location.href='${referURL }'">목록</button>
                             <c:choose>
 	                    		<c:when test="${sessionScope.user.id == bbsCon.writer}">
 	                            	<button type="button" class="btn btn-info" onclick="location.href='modify.bbs?bno=${bbsCon.bno}'">수정</button>
 	                            </c:when>
                             </c:choose>
+							
                         </div>
 
                     </form>
@@ -50,4 +54,5 @@
 
 
         </section>
+        
 <%@ include file="../include/footer.jsp" %>

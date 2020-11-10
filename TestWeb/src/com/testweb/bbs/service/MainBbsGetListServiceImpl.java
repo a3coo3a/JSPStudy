@@ -15,12 +15,13 @@ public class MainBbsGetListServiceImpl implements BbsService {
 		int result = 0;
 		BbsDAO dao = BbsDAO.getInstance();
 		
-		ArrayList<BbsVO> list = dao.mainbbs();
-		
+		ArrayList<BbsVO> list = dao.getList(1, 10);
+
 		if(list != null) {
 			request.setAttribute("list", list);
 			result = 1;
 		}
+		
 		return result;
 	}
 

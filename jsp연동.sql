@@ -93,8 +93,7 @@ create table bbs (
     writer VARCHAR2(50) not null,
     title VARCHAR2(100) not null,
     content VARCHAR2(2000),
-    regdate DATE DEFAULT sysdate,
-    id VARCHAR2(50)
+    regdate DATE DEFAULT sysdate
 );
 
 create SEQUENCE bbs_seq START with 1 INCREMENT by 1 NOCACHE;
@@ -112,19 +111,19 @@ DECLARE
 begin
     while var1 <= 300
     loop
-        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test1', 'test1', 'test1', 'ro');
-        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test02', 'test02', 'test02', '°³¶ËÀÌ');
-        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test3', 'test3', 'test3', '¶Ë¶ËÀÌ');
-        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test04', 'test04', 'test04', 'hello');
+        insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test1', 'test1', 'test1');
+        insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test02', 'test02', 'test02');
+        insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test3', 'test3', 'test3');
+        insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test04', 'test04', 'test04');
         var1 := var1 + 1;
     end loop;
     commit;
 end;
 
-     insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test1', 'test1', 'test1', 'ro');
-        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test02', 'test02', 'test02', '°³¶ËÀÌ');
-        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test3', 'test3', 'test3', '¶Ë¶ËÀÌ');
-        insert into bbs(bno, writer, title, content, id) values( bbs_seq.nextval, 'test04', 'test04', 'test04', 'hello');
+ insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test1', 'test1', 'test1');
+        insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test02', 'test02', 'test02');
+        insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test3', 'test3', 'test3');
+        insert into bbs(bno, writer, title, content) values( bbs_seq.nextval, 'test04', 'test04', 'test04');
 commit;
 
 
@@ -138,8 +137,32 @@ from (
              regdate
     from (select * 
              from bbs 
+             where writer='test1'
              order by bno desc)
 ) where rn > 0 and rn <=10;
+--ÀÌ°Å´Ù
+select *
+from(
+    select rownum rn , 
+         bno,
+         writer,
+         title,
+         content,
+         regdate
+    from (select 
+                bno, 
+                writer, 
+                title, 
+                content, 
+                b.regdate 
+            from bbs b 
+            join users u 
+            on b.writer = u.id 
+            where id='qqq111' 
+            order by bno desc)
+            ) where rn > 0 and rn <=10;
+
+select bno, writer, title, content, b.regdate from bbs b join users u on b.writer = u.id where id='qqq111' order by bno desc;
 
 select * from bbs;
 select * from users;

@@ -19,7 +19,7 @@ import com.testweb.user.model.UserVO;
 /**
  *  Filter를 이용해서 글작성, 수정, 삭제는 해당 회원만 삭제할 수 있도록 권한 처리
  */
-@WebFilter({"/bbs/write.bbs","/bbs/modify.bbs","/bbs/writeForm.bbs","/bbs/delete.bbs"})		
+@WebFilter({"/bbs/write.bbs","/bbs/modify.bbs","/bbs/updateForm.bbs","/bbs/writeForm.bbs","/bbs/delete.bbs","/user/logout.user","/user/mypage.user","/user/mypageinfo.user","/user/delete.user","/user/modify.user"})		
 public class BbsFilter implements Filter{
 
 	@Override

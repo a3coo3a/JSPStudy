@@ -122,7 +122,30 @@ public class BbsDAO {
 		
 		return total;
 	}
-
+	
+	public int getMyTotal(String writer) {
+		int total = 0;
+		
+		String sql = "select count(*) as total from bbs where writer=?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt("total");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn, pstmt, rs);
+		}
+		
+		return total;
+	}
+	
 	public BbsVO getContent(String bno) {
 		BbsVO vo = null;
 		String sql = "select * from bbs where bno=?";
@@ -170,26 +193,47 @@ public class BbsDAO {
 		return result;
 	}
 
-	public ArrayList<BbsVO> getMyContent(String writer) {
-		ArrayList<BbsVO> list = new ArrayList<>();
-		String sql = "select * from bbs where writer=?";
+	public ArrayList<BbsVO> getMyContent(String writer, int pageNum, int amount) {
+ArrayList<BbsVO> list = new ArrayList<>();
+		
+		String sql = "select *\n" + 
+				"from(\n" + 
+				"    select rownum rn , \n" + 
+				"         bno,\n" + 
+				"         writer,\n" + 
+				"         title,\n" + 
+				"         content,\n" + 
+				"         regdate\n" + 
+				"    from (select \n" + 
+				"                bno, \n" + 
+				"                writer, \n" + 
+				"                title, \n" + 
+				"                content, \n" + 
+				"                b.regdate \n" + 
+				"            from bbs b \n" + 
+				"            join users u \n" + 
+				"            on b.writer = u.id \n" + 
+				"            where id=? \n" + 
+				"            order by bno desc)\n" + 
+				"            ) where rn > ? and rn <=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, writer);
+			pstmt.setInt(2, (pageNum-1)*amount);
+			pstmt.setInt(3, pageNum*amount);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+				
 				int bno = rs.getInt("bno");
-				String wri = rs.getString("writer");
-				String title = rs.getString("title");
+				String title = rs.getString("title"); 
 				String content = rs.getString("content");
 				Timestamp regdate = rs.getTimestamp("regdate");
 				
-				list.add(new BbsVO(bno, wri, title, content, regdate));
+				list.add(new BbsVO(bno, writer, title, content, regdate));
 			}
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -218,45 +262,7 @@ public class BbsDAO {
 		return result;
 	}
 
-	public ArrayList<BbsVO> mainbbs() {
-		ArrayList<BbsVO> list = new ArrayList<BbsVO>();
-		String sql = "select * \r\n"
-				+ "from (\r\n"
-				+ "    select rownum rn, \r\n"
-				+ "           bno, \r\n"
-				+ "           writer, \r\n"
-				+ "           title, \r\n"
-				+ "           content, \r\n"
-				+ "           regdate \r\n"
-				+ "           from (select * \r\n"
-				+ "                  from bbs \r\n"
-				+ "                  order by bno desc) \r\n"
-				+ "    ) where rn > 0 and rn <= 10";
-		
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				int bno = rs.getInt("bno");
-				String writer = rs.getString("writer");
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				Timestamp regdate = rs.getTimestamp("regdate");
-				
-				list.add(new BbsVO(bno, writer, title, content, regdate));
-			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(conn, pstmt, rs);
-		}
-		
-		return list;
-	}
+	
 	
 	
 }
