@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-9 col-sm-12 join-form">
                     <h2 align="center">회원가입<small>(가운데정렬)</small></h2>
-					<h4 align="center">${msg }</h4>
+					<h4 align="center" style="color: red;">${msg }</h4>
                     <form name="regForm" action="joinForm.user" method="post">
                         <div class="form-group">
                             <label for="id">아이디</label>

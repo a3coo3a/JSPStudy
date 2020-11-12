@@ -12,7 +12,7 @@ import com.testweb.bbs.service.BbsService;
 import com.testweb.bbs.service.MainBbsGetListServiceImpl;
 
 
-@WebServlet("/index.main")
+@WebServlet({"/index.main"})
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
